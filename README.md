@@ -50,8 +50,4 @@ The **Automatic Plant Watering System** is an IoT-based project that automates t
 - **Zhapuneinuo Ziephru**  
 
 ## 📜 License  
-This project is open-source and free to use for educational and personal purposes.  
-
----
-
-This README provides a solid foundation for your GitHub repository. Let me know if you want any changes! 🚀
+This project is open-source and free to use for educational and personal purposes.
