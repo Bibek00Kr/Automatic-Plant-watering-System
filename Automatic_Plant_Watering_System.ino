@@ -5,12 +5,11 @@
 #include <BlynkSimpleEsp32.h>
 
 #define sensor 33
-#define relayPump 4      // Water pump
-#define relayFertilizer 15 // Fertilizer pump
+#define relayPump 4     
+#define relayFertilizer 15
 
 BlynkTimer timer;
 
-// Your Auth, SSID, Password
 char auth[] = "ObV3sC6BmuswFGp3oPGelG6UfQgQY0Z_";
 char ssid[] = "coco";
 char pass[] = "@123#Coco";
@@ -43,10 +42,8 @@ void soilMoisture()
   Serial.print(value);
   Serial.print("%\n");
 
-  // Update Blynk widget
   Blynk.virtualWrite(V0, value);
 
-  // Auto control water pump
   if (value < 40) {
     digitalWrite(relayPump, LOW);
     Serial.print("Motor ON\n");
@@ -75,7 +72,7 @@ BLYNK_WRITE(V1) {
   }
 }
 
-BLYNK_WRITE(V2) { // V2 controls fertilizer pump
+BLYNK_WRITE(V2) {
   bool Relay = param.asInt();
 
   if (Relay == 1) {
