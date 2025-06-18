@@ -1,16 +1,17 @@
-#define BLYNK_TEMPLATE_ID "TMPL3kd1SqTR6"
-#define BLYNK_TEMPLATE_NAME "Plant Watering System"
+#define BLYNK_TEMPLATE_ID "TMPL31JLvvki9"
+#define BLYNK_TEMPLATE_NAME "IoT Based"
+#define BLYNK_AUTH_TOKEN "LOVqfFdEpK-k0FHcxCXcwbZJZ0BEHEHh"
 
-#include <WiFiClient.h>
-#include <BlynkSimpleEsp32.h>
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
 
-#define sensor 33
-#define relayPump 4     
-#define relayFertilizer 15
+#define sensor A0
+#define relayPump 5      // GPIO5 (D1)
+#define relayFertilizer 4 // GPIO4 (D2)
 
 BlynkTimer timer;
 
-char auth[] = "ObV3sC6BmuswFGp3oPGelG6UfQgQY0Z_";
+char auth[] = "LOVqfFdEpK-k0FHcxCXcwbZJZ0BEHEHh";
 char ssid[] = "coco";
 char pass[] = "@123#Coco";
 
@@ -35,7 +36,7 @@ void setup()
 void soilMoisture()
 {
   int raw = analogRead(sensor);
-  int value = map(raw, 0, 4095, 0, 100);
+  int value = map(raw, 0, 1023, 0, 100);
   value = (value - 100) * -1;
 
   Serial.print("Moisture: ");
@@ -58,7 +59,8 @@ void soilMoisture()
   }
 }
 
-BLYNK_WRITE(V1) {
+BLYNK_WRITE(V1) // Manual control for pump
+{
   bool Relay = param.asInt();
 
   if (Relay == 1) {
@@ -72,7 +74,8 @@ BLYNK_WRITE(V1) {
   }
 }
 
-BLYNK_WRITE(V2) {
+BLYNK_WRITE(V2) // Manual control for fertilizer
+{
   bool Relay = param.asInt();
 
   if (Relay == 1) {
